@@ -1,0 +1,46 @@
+{
+  "menu": [
+    {
+      "url": "/dashboard",
+      "name": "Dashboards",
+      "icon": "bi bi-house-door pe-2 fw-bolder",
+      "slug": "dashboard"
+    },
+    {
+      "url": "/archivesboard",
+      "name": "Archives",
+      "icon": "bi bi-archive pe-2 fw-bolder",
+      "slug": "archives"
+    },
+    {
+      "url": "/",
+      "name": "Indexing",
+      "icon": "bi bi-layout-text-window-reverse pe-2 fw-bolder",
+      "slug": "index"
+    },
+    {
+      "url": "/editorialboard",
+      "name": "Editorial Board",
+      "icon": "bi bi-journal-check pe-2 fw-bolder",
+      "slug": "editorial"
+    },
+    {
+      "url": "/blog",
+      "name": "Blog",
+      "icon": "bi bi-book pe-2 fw-bolder",
+      "slug": "blog"
+    },
+    {
+      "url": "/conference_categories",
+      "name": "Conference Categories",
+      "icon": "bi bi-bookmarks pe-2 fw-bolder",
+      "slug": "conference_categories"
+    },
+    {
+      "url": "/conference",
+      "name": "Conference",
+      "icon": "bi bi-bookmark pe-2 fw-bolder",
+      "slug": "conference"
+    }
+  ]
+}
