@@ -6,7 +6,7 @@ use App\Models\Conference;
 use App\Models\Conference_Categories;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
-
+use Illuminate\Support\Str;
 class ConferenceController extends Controller
 {
     /**
@@ -36,9 +36,9 @@ class ConferenceController extends Controller
     /**
      * Store a newly created resource in storage.
      */
+
     public function store(Request $request)
     {
-
         $request->validate([
             'author' => 'required',
             'title' => 'required',
@@ -50,7 +50,17 @@ class ConferenceController extends Controller
 
         $path = null;
         if ($request->hasFile('pdf_url')) {
-            $path = $request->file('pdf_url')->store('conference', 'public');
+            // Get the original title and sanitize it for a filename
+            $sanitizedTitle = Str::slug($request->title, '_'); // Converts "My Title 2024" → "my_title_2024"
+            
+            // Get the file extension
+            $extension = $request->file('pdf_url')->getClientOriginalExtension();
+            
+            // Define the custom filename
+            $fileName = $sanitizedTitle . '.' . $extension;
+
+            // Store the file with the custom filename
+            $path = $request->file('pdf_url')->storeAs('conference', $fileName, 'public');
         }
 
         $record = Conference::create([
@@ -64,6 +74,7 @@ class ConferenceController extends Controller
 
         return redirect()->route("conference-home")->withSuccess("Conference Created Successfully!");
     }
+
 
     /**
      * Display the specified resource.
@@ -87,29 +98,42 @@ class ConferenceController extends Controller
      */
     public function update(Request $request, string $id)
     {
-
         $record = Conference::find($id);
-
-        $image = $record->pdf_url;
-
-        if ($request->hasFile('pdf_url')) {
-            // Store the new image
-            if ($image && Storage::disk('public')->exists($image)) {
-                // Delete the old image from the storage
-                Storage::disk('public')->delete($image);
-            }
-            $image = $request->file('pdf_url')->store('conference', 'public');
+    
+        if (!$record) {
+            return redirect()->route("conference-home")->withErrors("Conference not found!");
         }
-
+    
+        // Keep the old PDF path in case no new file is uploaded
+        $pdfPath = $record->pdf_url;
+    
+        if ($request->hasFile('pdf_url')) {
+            // Delete the old PDF file if it exists
+            if ($pdfPath && Storage::disk('public')->exists($pdfPath)) {
+                Storage::disk('public')->delete($pdfPath);
+            }
+    
+            // Generate new filename using the title
+            $sanitizedTitle = Str::slug($request->title, '_'); 
+            $extension = $request->file('pdf_url')->getClientOriginalExtension();
+            $fileName = $sanitizedTitle . '.' . $extension;
+    
+            // Store the file with the custom filename
+            $pdfPath = $request->file('pdf_url')->storeAs('conference', $fileName, 'public');
+        }
+    
+        // Update the record
         $record->update([
             "author" => $request->author,
             "title" => $request->title,
             "article_type" => $request->article_type,
             "pages" => $request->pages,
-            "pdf_url" => $image
+            "pdf_url" => $pdfPath
         ]);
+    
         return redirect()->route("conference-home")->withSuccess("Conference Successfully Updated!");
     }
+    
 
     /**
      * Remove the specified resource from storage.

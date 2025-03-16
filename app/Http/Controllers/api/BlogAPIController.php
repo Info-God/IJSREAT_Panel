@@ -20,7 +20,7 @@ class BlogAPIController extends Controller
             $domainName = 'https://ijsreat.com/blogImage';
             $blog = blog::all()
                 ->map(function ($item) use ($domainName) {
-                    // Add the domain name to the indexing_image_url
+                    
                     $item->image = $domainName . '/' . ltrim($item->image, '/');
                     return $item;
                 });
@@ -36,30 +36,51 @@ class BlogAPIController extends Controller
     public function blogDetails(Request $request)
     {
         $header = $request->header("Authorization");
+    
         if (empty($header)) {
-            $message = "Unauthenticated";
-            return response()->json(["error" => $message], 404);
-        } elseif ($header == "e1b3d61a14729026509aee1c291c8965f928ab08c5cc2562b46bc6962834983b") {
+            return response()->json(["error" => "Unauthenticated"], 404);
+        }
+    
+        if ($header == "e1b3d61a14729026509aee1c291c8965f928ab08c5cc2562b46bc6962834983b") {
             $domainName = 'https://ijsreat.com/blogImage';
+    
             $validate = Validator::make($request->all(), [
-                'id' => 'required',
+                'url_title' => 'required|exists:blogs,url_title',
             ]);
-
+    
             if ($validate->fails()) {
                 return response()->json(['errors' => $validate->errors()], 404);
             }
-            $blog = blog::find($request->id);
-            if (empty($blog)) {
-                $message = "Blog not found";
-                return response()->json(["error" => $message], 404);
-            } else {
-                $blog->image = $domainName . '/' . ltrim($blog->image, '/');
-                return response()->json(["blogDetails" => $blog], 200);
+    
+           
+            $blog = Blog::where('url_title', $request->url_title)->first();
+    
+            
+            if (!$blog) {
+                return response()->json(["error" => "Blog not found"], 404);
             }
-
-        } else {
-            $message = "Unauthenticated";
-            return response()->json(["error" => $message], 404);
+    
+            
+            $blog->image = $domainName . '/' . ltrim($blog->image, '/');
+    
+            return response()->json([
+                "blogDetails" => [
+                    "id" => $blog->id,
+                    "title" => $blog->title,
+                    "url_title" => $blog->url_title,
+                    "category" => $blog->category,
+                    "meta_title" => $blog->meta_title,
+                    "meta_description" => $blog->meta_description,
+                    "tags" => $blog->tags,
+                    "image" => $blog->image,
+                    "created_at" => $blog->created_at,
+                    "updated_at" => $blog->updated_at,
+                ]
+            ], 200);
         }
+    
+        return response()->json(["error" => "Unauthenticated"], 404);
     }
+    
+    
 }
