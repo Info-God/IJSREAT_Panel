@@ -13,7 +13,8 @@
                             <div class="card-body">
                                 <div class="d-flex align-items-start align-items-sm-center gap-4">
                                     <img src="{{ asset('assets/img/avatars/1.png') }}" alt="user-avatar"
-                                        class="d-block w-px-120 h-px-120 rounded" id="uploadedAvatar" style="object-fit:contain;" />
+                                        class="d-block w-px-120 h-px-120 rounded" id="uploadedAvatar"
+                                        style="object-fit:contain;" />
                                     <div class="button-wrapper">
                                         <label for="upload" class="btn btn-primary me-2 mb-3" tabindex="0">
                                             <span class="d-none d-sm-block">Upload new photo</span>
@@ -52,6 +53,79 @@
                                     @endif
                                 </div>
                             </div>
+
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control @if ($errors->has('title')) {{ 'is-invalid' }} @endif"
+                                        id="title" placeholder="Title" name="title" value="{{ old('title') }}" />
+                                    <label for="title">Title</label>
+                                    @if ($errors->has('title'))
+                                        <span class="invalid-feedback">
+                                            <Strong>{{ $errors->first('title') }}</Strong>
+                                        </span>
+                                    @endif
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input  type="text"
+                                        class="form-control @if ($errors->has('category')) {{ 'is-invalid' }} @endif"
+                                        id="category" placeholder="Category" name="category"
+                                        value="{{ old('category') }}" />
+                                    <label for="category">Category</label>
+                                    @if ($errors->has('category'))
+                                        <span class="invalid-feedback">
+                                            <Strong>{{ $errors->first('category') }}</Strong>
+                                        </span>
+                                    @endif
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input  type="text"
+                                        class="form-control @if ($errors->has('meta_title')) {{ 'is-invalid' }} @endif"
+                                        id="meta_title" placeholder="Meta Title" name="meta_title"
+                                        value="{{ old('meta_title') }}" />
+                                    <label for="meta_title">Meta Title</label>
+                                    @if ($errors->has('meta_title'))
+                                        <span class="invalid-feedback">
+                                            <Strong>{{ $errors->first('meta_title') }}</Strong>
+                                        </span>
+                                    @endif
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input  type="text"
+                                        class="form-control @if ($errors->has('meta_description')) {{ 'is-invalid' }} @endif"
+                                        id="meta_description" placeholder="Meta Description" name="meta_description"
+                                        value="{{ old('meta_description') }}" />
+                                    <label for="meta_description">Meta Description</label>
+                                    @if ($errors->has('meta_description'))
+                                        <span class="invalid-feedback">
+                                            <Strong>{{ $errors->first('meta_description') }}</Strong>
+                                        </span>
+                                    @endif
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input  type="text"
+                                        class="form-control @if ($errors->has('tags')) {{ 'is-invalid' }} @endif"
+                                        id="tags" placeholder="Tags" name="tags" value="{{ old('tags') }}" />
+                                    <label for="tags">Tags</label>
+                                    @if ($errors->has('tags'))
+                                        <span class="invalid-feedback">
+                                            <Strong>{{ $errors->first('tags') }}</Strong>
+                                        </span>
+                                    @endif
+                                </div>
+                            </div>
+
 
                         </div>
                         <div class="mt-4">

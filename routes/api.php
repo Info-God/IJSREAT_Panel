@@ -41,6 +41,10 @@ Route::post('/archiveYearListing', [ArchiveAPIController::class, 'archiveUnique'
 Route::post('/archivePaperListing', [ArchiveAPIController::class, 'archiveFetch']);
 Route::post('/archivePaper', [ArchiveAPIController::class, 'archiveGet']);
 Route::post('/editorialBoard', [EditorialController::class, 'editorialFetch']);
-Route::post('/blogfetch', [BlogAPIController::class, 'blogFetch']);
+
+Route::post('/blogFetch', [BlogAPIController::class, 'blogFetch']);
+
+Route::post('/blogDetails', [BlogAPIController::class, 'blogDetails']);
+
 Route::post('/conferenceCategoriesFetch', [Conference_categoriesAPIController::class, 'conferenceCategoriesFetch']);
 Route::post('/conferenceFetch', [ConferenceAPIController::class, 'conferenceFetch']);

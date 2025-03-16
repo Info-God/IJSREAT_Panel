@@ -91,13 +91,34 @@
                                         name="paper_month">
                                         <option value="">Select</option>
 
-                                        <option value="January-April" @if (old('paper_month', $archives->paper_month) == 'January-April') selected @endif>
-                                            January-April</option>
-                                        <option value="May-August" @if (old('paper_month', $archives->paper_month) == 'May-August') selected @endif>
-                                            May-August</option>
-                                        <option value="September-December"
-                                            @if (old('paper_month', $archives->paper_month) == 'September-December') selected @endif>September-December
-                                        </option>
+        <option value="January-February" @if (old('paper_month', $archives->paper_month) == 'January-February') selected @endif>
+        January-February</option>
+        <option value="March-April" @if (old('paper_month', $archives->paper_month) == 'March-April') selected @endif>
+        March-April</option>
+        <option value="May-June"
+            @if (old('paper_month', $archives->paper_month) == 'May-June') selected @endif>May-June
+        </option>
+
+        <option value="July-August"
+            @if (old('paper_month', $archives->paper_month) == 'July-August') selected @endif>July-August
+        </option>
+
+        <option value="September-October"
+            @if (old('paper_month', $archives->paper_month) == 'September-October') selected @endif>September-October
+        </option>
+
+        <option value="November-December"
+            @if (old('paper_month', $archives->paper_month) == 'November-December') selected @endif>November-December
+        </option>
+
+
+
+        <!--                                         <option value="January-February">January-February</option>
+                                        <option value="March-April">March-April</option>
+                                        <option value="May-June">May-June</option>
+                                        <option value="July-August">July-August</option>
+                                        <option value="September-October">September-October</option>
+                                        <option value="November-December">November-December</option> -->
 
                                     </select>
 

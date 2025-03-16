@@ -26,7 +26,7 @@ class ConferenceAPIController extends Controller
                 return response()->json(["error" => "No conference found"], 404);
             }
     
-            $domainName = 'https://ijsreat.com/archiver/';
+            $domainName = 'https://ijsreat.com/conferencePDF/';
     
             // Append the domain to the `pdf_url` field dynamically
             $rec = $rec->map(function ($conference) use ($domainName) {

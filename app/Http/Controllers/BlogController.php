@@ -37,7 +37,12 @@ class BlogController extends Controller
     {
         $request->validate([
             'description' => 'required',
-            'image' => 'required|file|mimes:png,jpg,jpeg,gif|max:20480',
+            'image' => 'file|mimes:png,jpg,jpeg,gif|max:20480',
+            'title' => 'required',
+            'category' => 'required',
+            'meta_title' => 'required',
+            'meta_description' => 'required',
+            'tags' => 'required',
         ]);
 
         $image = null;
@@ -47,7 +52,12 @@ class BlogController extends Controller
 
         $blog = blog::create([
             "description" => $request->description,
-            "image" => $image
+            "image" => $image,
+            "title" => $request->title,
+            "category" => $request->category,
+            "meta_title" => $request->meta_title,
+            "meta_description" => $request->meta_description,
+            "tags" => $request->tags,
 
         ]);
 
@@ -93,7 +103,13 @@ class BlogController extends Controller
 
         $record->update([
             "description" => $request->description,
-            "image" => $image
+            "image" => $image,
+            "title" => $request->title,
+            "category" => $request->category,
+            "meta_title" => $request->meta_title,
+            "meta_description" => $request->meta_description,
+            "tags" => $request->tags,
+
 
         ]);
         return redirect()->route("blog-home")->withSuccess("Blog Successfully Updated!");

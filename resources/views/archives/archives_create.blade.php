@@ -86,9 +86,12 @@
                                         class="select2 form-select @if ($errors->has('paper_month')) {{ 'is-invalid' }} @endif"
                                         name="paper_month" value="{{ old('paper_month') }}">
                                         <option value="">Select</option>
-                                        <option value="January-April">January-April</option>
-                                        <option value="May-August">May-August</option>
-                                        <option value="September-December">September-December</option>
+                                        <option value="January-February">January-February</option>
+                                        <option value="March-April">March-April</option>
+                                        <option value="May-June">May-June</option>
+                                        <option value="July-August">July-August</option>
+                                        <option value="September-October">September-October</option>
+                                        <option value="November-December">November-December</option>
 
                                     </select>
                                     <label for="month">Month</label>

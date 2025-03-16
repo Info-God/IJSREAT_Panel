@@ -13,6 +13,7 @@ class ArchiveAPIController extends Controller
     {
 
         $data = Archives::select("*")->get();
+  
         $domainName = 'https://ijsreat.com/archiver/';
         $data->transform(function ($item) use ($domainName) {
             $item->paper_url = $domainName . $item->paper_url; // Prepend the hardcoded base URL to paper_url
@@ -154,6 +155,7 @@ class ArchiveAPIController extends Controller
                 'paper_title' => $data->paper_title,
                 'paper_author' => $data->paper_author,
                 'paper_month' => $data->paper_month,
+                'year' => $data->year
             ];
 
             return response()->json(['paperdetails' => $formattedData], 200);

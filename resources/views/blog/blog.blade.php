@@ -12,9 +12,10 @@
             <h3>Blog</h3>
             <form action="{{ route('blog-home') }}" method="GET">
                 <div class="d-flex">
-                    <input type="text" class="form-control" name="description" aria-label="default input example" placeholder="Search">
+                    <input type="text" class="form-control" name="description" aria-label="default input example"
+                        placeholder="Search">
                     <button type="submit" class="btn btn-primary ms-1"><i class="bi bi-search"></i></button>
-                  </div>
+                </div>
             </form>
             <a href="{{ route('blog-create') }}" class="btn btn-primary">Add</a>
         </div>
@@ -25,18 +26,29 @@
                         <th>S.NO</th>
                         <th>IMAGES</th>
                         <th>CONTENT</th>
+                        <th>TITLE</th>
+                        <th>CATEGORY</th>
+                        <th>META TITLE</th>
+                        <th>META DESCRIPTION</th>
+                        <th>TAGS</th>
                         <th>ACTION</th>
                     </tr>
                 </thead>
                 <tbody class="table-border-bottom-0">
                     @foreach ($blogs as $key => $blog)
                         <tr>
-                            <td>{{  $blogs->firstItem() + $key  }}</td>
-                            <td><img class="" width="170px" height="170px"
-                                    src="{{ asset('storage/' . $blog->image) }}" alt="{{asset('storage/' . $blog->image) }}" style="object-fit: contain;object-position:center;"></td>
+                            <td>{{ $blogs->firstItem() + $key }}</td>
+                            <td><img width="170px" height="170px" src="{{ asset('storage/' . $blog->image) }}"
+                                    alt="{{ asset('storage/' . $blog->image) }}"
+                                    style="object-fit: contain;object-position:center;"></td>
                             <td>
                                 {{ $blog->description }}
                             </td>
+                            <td>{{ $blog->title }}</td>
+                            <td>{{ $blog->category }}</td>
+                            <td>{{ $blog->meta_title }}</td>
+                            <td>{{ $blog->meta_description }}</td>
+                            <td>{{ $blog->tags }}</td>
                             <td class="d-flex ">
 
                                 <form action="{{ route('blog-edit', $blog->id) }}" method="post">
